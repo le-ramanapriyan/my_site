@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Custom Select</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .select-container {
+      position: relative;
+      width: 240px;
+    }
+
+    .select {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .select:hover {
+      border-color: #aaa;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .options {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.2s ease, opacity 0.2s ease;
+      z-index: 10;
+    }
+
+    .options.show {
+      max-height: 200px;
+      opacity: 1;
+      overflow-y: auto;
+    }
+
+    .option {
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .option:hover {
+      background-color: #f0f0f0;
+    }
+
+    .select::after {
+      content: '▼';
+      font-size: 12px;
+      color: #666;
+    }
+
+    .select.open::after {
+      content: '▲';
+    }
+  </style>
+</head>
+
+<body>
+  <div class="select-container">
+    <div class="select">Select an option</div>
+    <div class="options">
+      <div class="option">Option 1</div>
+      <div class="option">Option 2</div>
+      <div class="option">Option 3</div>
+      <div class="option">Option 4</div>
+      <div class="option">Option 5</div>
+      <div class="option">Option 6</div>
+      <div class="option">Option 7</div>
+      <div class="option">Option 8</div>
+      <div class="option">Option 9</div>
+      <div class="option">Option 10</div>
+    </div>
+  </div>
+
+  <script>
+    const select = document.querySelector('.select');
+    const optionsContainer = document.querySelector('.options');
+    const optionsList = document.querySelectorAll('.option');
+
+    select.addEventListener('click', () => {
+      optionsContainer.classList.toggle('show');
+      select.classList.toggle('open');
+    });
+
+    optionsList.forEach(option => {
+      option.addEventListener('click', () => {
+        select.textContent = option.textContent;
+        optionsContainer.classList.remove('show');
+        select.classList.remove('open');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.select-container')) {
+        optionsContainer.classList.remove('show');
+        select.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+
+</html>
