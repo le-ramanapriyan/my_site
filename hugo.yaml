@@ -1,0 +1,7 @@
+baseURL: 'https://example.org/'
+title: 'My Hugo Site'
+MetaDataFormat: "yaml"
+contentdir: "content"
+layoutdir: "layouts"
+publishdir: "public"
+disableKinds: ["RSS", "sitemap", "taxonomy", "section"]
